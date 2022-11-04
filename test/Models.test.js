@@ -11,10 +11,17 @@ describe('Checks boards data is correct', () => {
         await seed()
     })
 
-    test('Instance is created on start', async () => {
+    test('Type is created on start', async () => {
         const test = await Board.findAll({where: {type: "Aged"}})
         expect(test[0].getDataValue("type")).toMatch('Aged');
     })
+
+    test('Description is created on start', async () => {
+        const test = await Board.findAll({where: {description: "Gouda, Sharp Cheddar, Gruyere"}})
+        expect(test[0].getDataValue("description")).toMatch('Gouda, Sharp Cheddar, Gruyere');
+    })
+
+
 })
 
 
@@ -23,6 +30,10 @@ describe('Checks cheese data is correct', () => {
     beforeEach(async () => {
         await Cheese.sync({force: true})
         await seed()
+    })
+    test('Instance is created on start', async () => {
+        const test = await Cheese.findAll({where: {title: "Parmesan"}})
+        expect(test[0].getDataValue("description")).toMatch('The flavor power of parmesan can take a savory dish from acceptable to amazing with a dusting of this delicious cheese. Lots of words are used to describe parmesan: rich, tangy, nutty, sharp, complex, fruity, and bold to name a few. It has a somewhat gritty texture and a strong umami taste.');
     })
     test('Instance is created on start', async () => {
         const test = await Cheese.findAll({where: {title: "Parmesan"}})
@@ -70,7 +81,7 @@ describe('Relationships works', () => {
                 title: "Parmesan"
             }
         })
-        expect(test[0].getDataValue("Cheese_Board")).toBe("Parmesan");
+        expect(test[0].getDataValue("title")).toBe("Parmesan");
     })
 })
 
