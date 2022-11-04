@@ -4,8 +4,14 @@ const db = require('../db/db')
 class Cheese extends Model{}
 
 Cheese.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
 }, {
     sequelize: db
 })
