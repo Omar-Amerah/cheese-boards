@@ -1,4 +1,4 @@
-const { Board, Cheese, User } = require('../models')
+const { Board, Cheese, User} = require('../models')
 const db = require('./db')
 
 async function seed() {
@@ -141,13 +141,24 @@ async function seed() {
     ])
 
     const u1 = await User.findByPk(1)
-    let b1 = await Board.findByPk(1)
-    let b2 = await Board.findByPk(2)
+    let b11 = await Board.findByPk(1)
+    let b12 = await Board.findByPk(2)
 
-    u1.addBoards([b1, b2])
-    b1 = await Board.findByPk(1)
-    b2 = await Board.findByPk(2)
+    u1.addBoards([b11, b12])
+    b11 = await Board.findByPk(1)
+    b12 = await Board.findByPk(2)
 
+    let b21 = await Board.findByPk(3)
+    let b22 = await Board.findByPk(4)
+
+    const c1 = await Cheese.findByPk(1)
+    const c2 = await Cheese.findByPk(2)
+    const c3 = await Cheese.findByPk(3)
+    const c4 = await Cheese.findByPk(4)
+    b21.addCheeses([c1, c2])
+    b22.addCheeses([c3, c4, c1])
+    b21 = await Board.findByPk(3)
+    b22 = await Board.findByPk(4)
 }
 
 

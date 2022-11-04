@@ -1,5 +1,5 @@
 //const { Board } = require('cheese-boards/models/board.model.js');
-const { Board, User, Cheese } = require("../models");
+const { Board, User, Cheese} = require("../models");
 const { db } = require('cheese-boards/db/db.js');
 const seed  = require('cheese-boards/db/seed.js');
 
@@ -56,5 +56,22 @@ describe('Relationships works', () => {
     })
 })
 
+describe('Relationships works', () => {
+    beforeEach(async () => {
+        await seed()
+    })
+
+    test('Many to many works', async () => {
+        const test = await Cheese.findAll({
+            include: {
+                model: Board
+                
+            }, where: {
+                title: "Parmesan"
+            }
+        })
+        expect(test[0].getDataValue("Cheese_Board")).toBe("Parmesan");
+    })
+})
 
 
